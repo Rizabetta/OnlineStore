@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb')
-
 const client = new MongoClient('mongodb+srv://admin:mongodb@cluster0.7nzu9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+
+const router = require('./routes/index')
 
 const start = async () => {
     try {
@@ -22,5 +23,7 @@ const express = require("express")
 
 const PORT = process.env.PORT || 5000
 const app = express()
+
+app.use('/api', router)
 
 app.listen(PORT, () => console.log('server start'))
