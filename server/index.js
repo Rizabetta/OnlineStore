@@ -4,11 +4,10 @@ const { MongoClient } = require('mongodb')
 const client = new MongoClient('mongodb+srv://admin:mongodb@cluster0.7nzu9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
 const express = require("express")
+const mongoose = require('mongoose')
 const cors = require('cors')
 const router = require('./routes/index')
 const errorHendler = require('./middleware/ErrorHandlingMiddleware')
-
-
 
 const PORT = process.env.PORT || 5000
 
@@ -19,17 +18,20 @@ app.use('/api', router)
 
 app.use(errorHendler) //обработка ошибок, последний middleware
 
-app.listen(PORT, () => console.log('server start'))
-
 const start = async () => {
     try {
-        await client.connect()
-        console.log("подключение установлено")
-        await client.db().createCollection('users')
+        /*await client.connect()
+        console.log("подключение установлено")*/
+
+        await mongoose.connect('mongodb+srv://admin:mongodb@cluster0.7nzu9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+        app.listen(PORT, () => console.log('server start'))
+
+        /*await client.db().createCollection('users')
         const users = client.db().collection('users')
         await users.insertOne({ name: 'ann', age: '15' })
-        const user = await users.findOne({ name: 'ann' })
-        console.log(user)
+        const user = await users.findOne({ name: 'ann' })       
+        console.log(user)*/
+
     } catch (e) {
         console.log(e)
     }
