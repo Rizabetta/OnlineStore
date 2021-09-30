@@ -6,7 +6,7 @@ const Role = require('../models/Role')
 class UserController {
     async registration(req, res) {
         try {
-            const { username, password } = res.body
+            const { username, password } = req.body
             const candidate = await User.findOne({ username })
 
             if (candidate) {
