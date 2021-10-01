@@ -1,11 +1,18 @@
 const ApiError = require('../error/ApiError');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { validationResult } = require('express-validator')
 
 const User = require('../models/User')
 const Role = require('../models/Role')
 class UserController {
     async registration(req, res) {
         try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ message: "Ошибка при регистрации", errors })
+            }
+
             const { username, password } = req.body
             const candidate = await User.findOne({ username })
 
@@ -26,7 +33,15 @@ class UserController {
 
     async login(req, res) {
         try {
-
+            const { username, password } = req.body
+            const user = await User.findOne({ username })
+            if (!user) {
+                res.status(4000).json({ message: `Пользователь ${username} не найден` })
+            }
+            const validPassword = bcrypt.compareSync(password, user.password) //хешированный пароль берем из базы данных
+            if (!validPassword) {
+                res.status(4000).json({ message: `Введен неверный пароль` })
+            }
         } catch (e) {
             console.log(e)
             res.status(4000).json({ message: 'Login error' })
