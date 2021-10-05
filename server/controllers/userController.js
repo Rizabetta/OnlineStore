@@ -5,6 +5,17 @@ const { validationResult } = require('express-validator')
 
 const User = require('../models/User')
 const Role = require('../models/Role')
+const { secret } = require('../config')
+
+const generateAccessToken = (id, roles) => {
+    const payload = {
+        id,
+        roles
+    }
+    return jwt.sign(payload, secret, { expiresIn: '24h' })
+}
+
+
 class UserController {
     async registration(req, res) {
         try {
@@ -42,6 +53,8 @@ class UserController {
             if (!validPassword) {
                 res.status(4000).json({ message: `Введен неверный пароль` })
             }
+            const token = generateAccessToken(user._id, user.roles)
+            return res.json({ token })
         } catch (e) {
             console.log(e)
             res.status(4000).json({ message: 'Login error' })
