@@ -15,7 +15,6 @@ const generateAccessToken = (id, roles) => {
     return jwt.sign(payload, secret, { expiresIn: '24h' })
 }
 
-
 class UserController {
     async registration(req, res) {
         try {
@@ -61,17 +60,9 @@ class UserController {
         }
     }
 
-    async check(req, res, next) {
-        try {
-            res.json('serwer work')
-            /*const { id } = req.query
-            if (!id) {
-                return next(ApiError.badRequest('не задан id'))
-            }
-            res.json(id);*/
-        } catch (e) {
-
-        }
+    async check(req, res, next) { //перезапись токена
+        const token = generateAccessToken(req.user.id, req.user.role)
+        return res.json({ token })
     }
 }
 
