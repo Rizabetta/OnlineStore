@@ -5,8 +5,12 @@ const Device = new Schema({
     price: { type: Number, required: true },
     rating: [{ type: Number, ref: 'Rating' }],
     img: { type: String, required: true },
-    typeid: [{ type: Number, ref: 'Type' }],
-    brandid: [{ type: Number, ref: 'Brand' }]
+    typeid: [{ type: String, ref: 'Type' }],
+    brandid: [{ type: String, ref: 'Brand' }],
+    deviceInfo: [{
+        title: [{ type: String }],
+        desc: [{ type: String }]
+    }]
 })
 
 module.exports = model('Device', Device)
