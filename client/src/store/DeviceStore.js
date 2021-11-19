@@ -16,9 +16,10 @@ export default class DeviceStore {
             { id: 3, name: '3', price: 2500, rating: 5, img: `` },
             { id: 4, name: '4', price: 2500, rating: 5, img: `` }
         ]
+        this._selectedType = {}
+        this._selectedBrand = {}
         makeAutoObservable(this)
     }
-
 
     setTypes(types) {
         this._types = types
