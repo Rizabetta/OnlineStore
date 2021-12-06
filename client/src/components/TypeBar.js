@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite'
 const TypeBar = observer(() => {
     const { device } = useContext(Context)
     return (
-        <ListGroup variant="flush" style={{ width: window.innerHeight / 3 }}>
+        <ListGroup variant="flush" style={{ width: window.innerHeight / 4 }}>
             {device.types.map(type =>
                 <ListGroup.Item
                     action variant="secondary"
