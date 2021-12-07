@@ -8,7 +8,7 @@ import DeviceList from '../components/DeviceList';
 const Shop = () => {
     return (
         <Container >
-            <Row className="mt-2">
+            <Row className="mt-3">
                 <Col md={3} >
                     <TypeBar></TypeBar>
                 </Col>
