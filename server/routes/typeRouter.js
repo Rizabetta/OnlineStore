@@ -5,7 +5,7 @@ const roleMiddleware = require('../middleware/RoleMiddleware')
 
 const typeController = require('../controllers/typeController')
 
-router.post('/', typeController.create)
-router.get('/', roleMiddleware(['ADMIN']), typeController.getAll)
+router.post('/', roleMiddleware(['ADMIN']), typeController.create)
+router.get('/', typeController.getAll)
 
 module.exports = router
