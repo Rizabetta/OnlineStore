@@ -1,6 +1,7 @@
 import Button from '@restart/ui/esm/Button';
 import React from 'react';
-import { Container, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import Modal from "react-bootstrap/Modal";
 
 const CreateType = ({ show, onHide }) => { //пропс на отобр. и ф, скрывающ. м.о.
     return (

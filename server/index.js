@@ -26,7 +26,7 @@ const start = async () => {
         console.log("подключение установлено")*/
 
         await mongoose.connect('mongodb+srv://admin:mongodb@cluster0.7nzu9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-        app.listen(PORT, () => console.log('server start'))
+        app.listen(PORT, () => console.log(`server start on ${PORT} port`))
 
         /*await client.db().createCollection('users')
         const users = client.db().collection('users')
