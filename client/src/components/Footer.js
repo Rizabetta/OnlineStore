@@ -7,33 +7,36 @@ import {
     FooterLink,
     Heading,
 } from "./FooterStyles";
+import { SHOP_ROUTE } from "../utils/consts";
 
 const Footer = () => {
+
     return (
         <Box>
-
             <Container>
                 <Row>
                     <Column>
-                        <Heading>Меню</Heading>
-                        <FooterLink href="#">Магазин</FooterLink>
-                        <FooterLink href="#">Авторизация</FooterLink>
-                        <FooterLink href="#">Регистрация</FooterLink>
+                        <Heading>Информация</Heading>
+                        <FooterLink href={SHOP_ROUTE}>Магазин</FooterLink>
+                        <FooterLink>О нас</FooterLink>
                     </Column>
+
                     <Column>
                         <Heading>Помощь с заказом</Heading>
-                        <FooterLink href="#">с 9:00 до 18:00 по Московскому времени</FooterLink>
-                        <FooterLink href="#">+79183392474 (по России)</FooterLink>
-                        <FooterLink href="#">+79183392472 (Саратов)</FooterLink>
+                        <FooterLink>с 9:00 до 18:00 по Московскому времени</FooterLink>
+                        <FooterLink>+79183392474 (по России)</FooterLink>
+                        <FooterLink>+79183392472 (Саратов)</FooterLink>
                     </Column>
-                    <Column>
+
+                    <Column className="display-flex">
                         <Heading>Социальные сети</Heading>
-                        <FooterLink href="#">instagram</FooterLink>
-                        <FooterLink href="#">telegram</FooterLink>
-                        <FooterLink href="#">VK</FooterLink>
+                        <FooterLink href="https://www.instagram.com/">instagram</FooterLink>
+                        <FooterLink href="https://web.telegram.org/">telegram</FooterLink>
+                        <FooterLink href="https://vk.com/">VK</FooterLink>
                     </Column>
                 </Row>
             </Container>
+
             <Heading style={{
                 color: "#878787",
                 fontSize: "11px",
