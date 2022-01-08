@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 import { Container, Form } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
 import { NavLink, useLocation, useHistory } from "react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/userAPI";
@@ -14,28 +13,29 @@ const Auth = observer(() => {
     const location = useLocation()
     const history = useHistory()
     const isLogin = location.pathname === LOGIN_ROUTE
-    const [name, setName] = useState('')
+    const [username, setName] = useState('')
     const [password, setPassword] = useState('')
 
     const click = async () => {
         try {
             let data;
             if (isLogin) {
-                data = await login(name, password)
-                alert(`${name},вы авторизировались`)
+                data = await login(username, password)
+                alert(`${username},вы авторизировались`)
+                console.log(data.roles)
 
             } else {
-                data = await registration(name, password)
-                alert(`${name}, теперь вы зарегистрированы!`)
+                data = await registration(username, password)
+                alert(`${username}, теперь вы зарегистрированы!`)
             }
             user.setUser(user)
             user.setIsAuth(true)
             history.push(SHOP_ROUTE)
         } catch (e) {
             console.log(e.response.data.message)
-            if (((password.length < 4) || (password.length > 10)) && (name != "")) console.log(e.response.data.errors.errors[0].msg)
-            if ((name == "") && (password.length >= 4) && (password.length <= 10)) console.log(e.response.data.errors.errors[0].msg)
-            if (((name == "") && (password.length < 4)) || ((name == "") && (password.length > 10))) {
+            if (((password.length < 4) || (password.length > 10)) && (username !== "")) console.log(e.response.data.errors.errors[0].msg)
+            if ((username === "") && (password.length >= 4) && (password.length <= 10)) console.log(e.response.data.errors.errors[0].msg)
+            if (((username === "") && (password.length < 4)) || ((username === "") && (password.length > 10))) {
                 console.log(e.response.data.errors.errors[0].msg)
                 console.log(e.response.data.errors.errors[1].msg)
             }
@@ -52,7 +52,7 @@ const Auth = observer(() => {
                     <Form.Control
                         className='mt-4'
                         placeholder='введите имя'
-                        value={name}
+                        value={username}
                         onChange={e => setName(e.target.value)}
                     />
                     <Form.Control
